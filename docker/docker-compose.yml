@@ -10,7 +10,7 @@ services:
     environment:
       MYSQL_USER: graphql
       MYSQL_PASSWORD: graphql
-      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD: root
     volumes:
       - db-data:/var/lib/mysql
 
