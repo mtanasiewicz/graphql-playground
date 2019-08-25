@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,26 +25,8 @@ class Apartment
     private $streetAddress;
 
     /**
-     * @ORM\Column(type="string", length=80)
-     * @var string
-     */
-    private $city;
-
-    /**
-     * @ORM\Column(type="string", length=20)
-     * @var string
-     */
-    private $zipCode;
-
-    /**
-     * @ORM\Column(type="string", length=80)
-     * @var string
-     */
-    private $country;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @var int
+     * @ORM\Column(type="date")
+     * @var DateTime
      */
     private $buildYear;
 
@@ -54,29 +37,25 @@ class Apartment
     private $size;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\District", inversedBy="apartments")
+     * @ORM\JoinColumn(nullable=false)
+     * @var District
+     */
+    private $district;
+
+    /**
      * Apartment constructor.
      * @param string $streetAddress
-     * @param string $city
-     * @param string $zipCode
-     * @param string $country
-     * @param int $buildYear
+     * @param DateTime $buildYear
      * @param float $size
+     * @param District $district
      */
-    public function __construct(
-        string $streetAddress,
-        string $city,
-        string $zipCode,
-        string $country,
-        int $buildYear,
-        float $size
-    )
+    public function __construct(string $streetAddress, DateTime $buildYear, float $size, District $district)
     {
         $this->streetAddress = $streetAddress;
-        $this->city = $city;
-        $this->zipCode = $zipCode;
-        $this->country = $country;
         $this->buildYear = $buildYear;
         $this->size = $size;
+        $this->district = $district;
     }
 
     /**
@@ -96,33 +75,9 @@ class Apartment
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getCity(): string
-    {
-        return $this->city;
-    }
-
-    /**
-     * @return string
-     */
-    public function getZipCode(): string
-    {
-        return $this->zipCode;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCountry(): string
-    {
-        return $this->country;
-    }
-
-    /**
-     * @return int
-     */
-    public function getBuildYear(): int
+    public function getBuildYear(): DateTime
     {
         return $this->buildYear;
     }
@@ -133,5 +88,13 @@ class Apartment
     public function getSize(): float
     {
         return $this->size;
+    }
+
+    /**
+     * @return District
+     */
+    public function getDistrict(): District
+    {
+        return $this->district;
     }
 }
