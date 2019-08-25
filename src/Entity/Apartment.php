@@ -24,19 +24,19 @@ class Apartment
     private $streetAddress;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=80)
      * @var string
      */
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=20)
      * @var string
      */
     private $zipCode;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=80)
      * @var string
      */
     private $country;
